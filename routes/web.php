@@ -14,9 +14,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/register', [RegisterController::class, 'register']);
 Route::get('/login', [RegisterController::class, 'login']);
@@ -24,4 +22,7 @@ Route::get('/login', [RegisterController::class, 'login']);
 Route::post('/register-user',[RegisterController::class,'registerUser'])->name('register-user');
 Route::post('login-user', [RegisterController::class, 'loginUser'])->name('login-user');
 
-Route::get('/dashboard',[RegisterController::class,'dashboard'])->middleware('isLoggedIn');
+Route::get('/home',[RegisterController::class,'dashboard'])->middleware('isLoggedIn');
+Route::get('/users-list',[RegisterController::class,'list'])->middleware('isLoggedIn');
+
+Route::get('/logout', [RegisterController::class,'logout']);

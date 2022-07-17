@@ -33,7 +33,7 @@ class RegisterController extends Controller
         $Accountant->password = Hash::make($request->password);
         $res= $Accountant-> save();
         if ($res){
-            return back()->with('success','You have Registered Successfully');
+            return redirect('login');
         } else {
             return back()->with('fail','Something went wrong.');
         }
@@ -48,7 +48,7 @@ class RegisterController extends Controller
                 if($accountant){
                     if (Hash::check($request->password, $accountant->password)){
                         $request->session()->put('loginId',$accountant->id);
-                        return redirect('dashboard');
+                        return redirect('home');
                     }else{
                         return back()->with('fail','The password does not matches');
                     }
@@ -57,7 +57,22 @@ class RegisterController extends Controller
                 }
     }
 
-    public function dashboard(Accountant $accountant){
-        return view('dashboard.userListing');
+    function dashboard()
+    {
+        return view('dashboard.welcome');
+    }
+
+    public function list(){
+        $accountant_data = Accountant::all();
+        return view('dashboard.userListing', ['users' => $accountant_data]);
+    }
+
+    function logout()
+    {
+        if(session()->has('loginId'))
+        {
+            session()->pull('loginId');
+            return redirect('login');
+        }
     }
 }
