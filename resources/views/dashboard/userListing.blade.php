@@ -16,7 +16,7 @@
                 <td>{{$user['id']}}</td>
                     <td>{{$user['fname']}} </td>
                     <td>{{$user['lname']}}</td>
-                    <td>{{$user['email']}}</td>
+                    <td>{{$user['mail']}}</td>
                     <td>{{$user['phone']}}</td>
                 </tr>
                 @endforeach
