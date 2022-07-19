@@ -16,13 +16,13 @@ use App\Http\Controllers\RegisterController;
 
 
 
-Route::get('/register', [RegisterController::class, 'register']);
-Route::get('/login', [RegisterController::class, 'login']);
+Route::get('/', [RegisterController::class, 'register'])->name('register');
+Route::get('/login', [RegisterController::class, 'login'])->name('login');
 
 Route::post('/register-user',[RegisterController::class,'registerUser'])->name('register-user');
 Route::post('login-user', [RegisterController::class, 'loginUser'])->name('login-user');
 
-Route::get('/home',[RegisterController::class,'dashboard'])->middleware('isLoggedIn');
-Route::get('/users-list',[RegisterController::class,'list'])->middleware('isLoggedIn');
+Route::get('/home',[RegisterController::class,'dashboard'])->middleware('isLoggedIn')->name('home');
+Route::get('/users-list',[RegisterController::class,'list'])->middleware('isLoggedIn')->name('users-list');
 
-Route::get('/logout', [RegisterController::class,'logout']);
+Route::get('/logout', [RegisterController::class,'logout'])->name('logout');

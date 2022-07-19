@@ -23,6 +23,6 @@
     <button type="submit" class="btn btn-block btn-primary">login</button>
     </div>
     <div class="text-center">
-        <p>Not a user yet?<a href="register">Register now!</a></p>
+        <p>Not a user yet?<a href="/">Register now!</a></p>
     </div>
 </form>
