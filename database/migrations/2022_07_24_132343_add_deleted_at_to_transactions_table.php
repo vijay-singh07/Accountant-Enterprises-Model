@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('accountants', function (Blueprint $table) {
-            $table->id();
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('mail')->unique();
-            $table->bigInteger('phone');
-            $table->string('password');
-            $table->timestamps();
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accountants');
+        Schema::table('transactions', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

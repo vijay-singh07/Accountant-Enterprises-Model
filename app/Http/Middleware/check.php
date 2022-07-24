@@ -16,8 +16,8 @@ class check
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session()->has('loginId')){
-            return redirect('login')->with('fail','you need to login');
+        if(!Session()->has('login_Id')){
+            return redirect()->route('login')->with('fail','you need to login');
         }
         return $next($request);
     }
