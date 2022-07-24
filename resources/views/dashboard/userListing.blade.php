@@ -4,19 +4,25 @@
         <hr>
         <table class="table">
             <thead>
+                <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email Adress</th>
                 <th>Phone number</th>
             </thead>
             <tbody>
-                @foreach ($accountants as $accountant)
+                @foreach ($users as $user)
                 <tr>
-                    <td>{{ $accountant-> fname}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <td>{{$user['id']}}</td>
+                    <td>{{$user['fname']}} </td>
+                    <td>{{$user['lname']}}</td>
+                    <td>{{$user['mail']}}</td>
+                    <td>{{$user['phone']}}</td>
                 </tr>
                 @endforeach
     </div>
+</div>
+
+<div>
+    <a href="/logout">Logout</a>
 </div>
