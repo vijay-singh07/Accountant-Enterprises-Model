@@ -32,7 +32,6 @@ class TransactionRequest extends FormRequest
             'unit_name'=>'required',
             'type'=>'required',
             'status'=>'required',
-            'comments'=>'required',
             'project'=>'required'
         ];
     }
