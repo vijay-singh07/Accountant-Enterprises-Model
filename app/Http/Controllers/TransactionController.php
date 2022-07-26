@@ -4,32 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\transaction;
+use App\Http\Requests\TransactionRequest;
 use PDF;
 
 class TransactionController extends Controller
 {
     public function index(){
-        return view('dashboard.createTransaction');
+        return view('dashboard.create_transaction');
     }
 
     public function show(){
-        return view('dashboard.transactionList');
+        return view('dashboard.transaction_list');
     }
 
-    public function save(Request $request){
-        $request->validate([
-            'date'=>'required',
-            'description'=>'required',
-            'paid'=>'required',
-            'unit_amount'=>'required|max:10',
-            'unit_quantity'=>'required|max:10',
-            'unit_name'=>'required',
-            'type'=>'required',
-            'status'=>'required',
-            'utr'=>'required',
-            'comments'=>'required',
-            'project'=>'required'
-            ]);
+    public function save(TransactionRequest $request){
             $Transaction= new Transaction();
             $Transaction->date = $request->date;
             $Transaction->description = $request->description;
@@ -52,12 +40,12 @@ class TransactionController extends Controller
 
     public function list(){
         $transaction_data = Transaction::latest('updated_at')->get();
-        return view('dashboard.transactionList', ['lists' => $transaction_data]);
+        return view('dashboard.transaction_list', ['lists' => $transaction_data]);
     }
 
     public function edit($id){
         $editable = Transaction::find($id);
-        return view('dashboard.editTransaction', compact('editable'));
+        return view('dashboard.edit_transaction', compact('editable'));
     }
 
     public function delete($id){
@@ -69,18 +57,6 @@ class TransactionController extends Controller
     }
 
     public function update( Request $request){
-        $request->validate([
-            'date'=>'required',
-            'description'=>'required',
-            'paid'=>'required',
-            'unit_amount'=>'required|max:10',
-            'unit_quantity'=>'required|max:10',
-            'unit_name'=>'required',
-            'type'=>'required',
-            'status'=>'required',
-            'comments'=>'required',
-            'project'=>'required'
-            ]);
 
             $Transaction= Transaction::find($request->tid);
             $Transaction-> date= $request->date;
@@ -108,7 +84,6 @@ class TransactionController extends Controller
         $pdf = PDF::loadView('invoice.reciept', $reciept);
 
         return $pdf->download('reciept.pdf');
-        // return view('receipt',['data'=>$data]);
     }
 
 }
