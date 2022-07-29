@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\accountant;
+use App\Http\Requests\RegisterRequest;
 use Hash;
 use Session;
 
@@ -17,14 +18,7 @@ class RegisterController extends Controller
         return view ('auth.register');
     }
 
-    public function registerUser(Request $request,Accountant $accountant){
-        $request->validate([
-        'fname'=>'required',
-        'lname'=>'required',
-        'mail'=>'required|email|unique:accountants',
-        'phone'=>'required|max:10',
-        'password'=>'required|confirmed|min:8|max:12',
-        ]);
+    public function registerUser(RegisterRequest $request,Accountant $accountant){
         $Accountant= new Accountant();
         $Accountant->fname = $request->fname;
         $Accountant->lname = $request->lname;
@@ -62,11 +56,14 @@ class RegisterController extends Controller
         return view('dashboard.welcome');
     }
 
+<<<<<<< HEAD
+=======
     public function list(){
         $accountant_data = Accountant::all();
         return view('dashboard.userListing', ['users' => $accountant_data]);
     }
 
+>>>>>>> 2c2546de353e85e4bed7d597d3e705973293a3cb
     function logout()
     {
         if(session()->has('login_Id'))
